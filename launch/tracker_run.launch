@@ -1,4 +1,4 @@
 <launch>
-        <node name="image_sender" pkg="uav_project" type="image_sender" />
-	<node name="traker_run" pkg="uav_project" type="tracker" />
+        <node name="traker_run" pkg="uav_project" type="tracker" />
+	<node name="image_sender" pkg="uav_project" type="image_sender" />
 </launch>

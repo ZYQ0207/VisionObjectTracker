@@ -11,12 +11,13 @@ ImageReceiver::ImageReceiver(ros::NodeHandle &n):
   it_(n)
 {
   //basic configuration
-  image_sub_ = it_.subscribe("/image_raw", 10, &ImageReceiver::image_callback, this);
+  image_sub_ = it_.subscribe("/image_raw", 25, &ImageReceiver::image_callback, this);
   image_index = 1;
   cv::namedWindow(OPENCV_WINDOW);
 
   //initiate KCF tracker
   this->tracker = new KCFFrameTracker(cv::Rect(246, 226, 94, 114));
+  //this->tracker = new KCFFrameTracker(cv::Rect(146, 54, 68, 101));
 }
 
 
@@ -40,6 +41,6 @@ void ImageReceiver::image_callback(const sensor_msgs::ImageConstPtr& msg)
   cv::rectangle(cv_ptr->image, result_rect, cv::Scalar(0, 255, 255), 2, 8);
   //show the result on the picture
   cv::imshow(OPENCV_WINDOW, cv_ptr->image);
-  cv::waitKey(3);
+  cv::waitKey(1);//this number connot be too large
 
 }

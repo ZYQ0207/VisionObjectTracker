@@ -137,7 +137,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/uav_project_node.cpp)
-add_executable(image_sender src/images_sender/main.cpp src/images_sender/image_sender.cpp src/images_sender/image_sender.hpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -152,7 +152,7 @@ add_executable(image_sender src/images_sender/main.cpp src/images_sender/image_s
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(image_sender ${catkin_LIBRARIES} ${OpenCV_LIBS})
+
 #############
 ## Install ##
 #############
@@ -200,3 +200,23 @@ target_link_libraries(image_sender ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+##########################
+#       ZYQ define       #
+##########################
+
+# the build process of image_sender
+set(IMAGE_SENDER src/images_sender/main.cpp
+	src/images_sender/image_sender.cpp)
+
+add_executable(image_sender ${IMAGE_SENDER})
+target_link_libraries(image_sender ${catkin_LIBRARIES} ${OpenCV_LIBS})
+# the build of the tracker_run program
+set(KCF_SRC src/kcf/kcf_source/fhog.cpp
+	src/kcf/kcf_source/kcftracker.cpp)
+set(IMAGE_RECEIVER src/images_receiver/main.cpp
+	src/images_receiver/images_receiver.cpp)
+set(KCF_TRACKER src/kcf/kcf_tracker/kcf_tracker.cpp)
+
+add_executable(tracker ${IMAGE_RECEIVER} ${KCF_SRC} ${KCF_TRACKER})
+target_link_libraries(tracker ${catkin_LIBRARIES} ${OpenCV_LIBS})

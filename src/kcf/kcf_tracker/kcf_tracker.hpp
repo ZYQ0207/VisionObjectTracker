@@ -10,7 +10,7 @@ public:
   KCFFrameTracker(cv::Rect init_rect);
   ~KCFFrameTracker();
   cv::Rect track(cv::Mat frame);
-
+  int test;
 private:
   //the pointer that point to the KCF tracker
   KCFTracker *tracker_ptr;
@@ -19,11 +19,11 @@ private:
   //the init location and the continous result
   cv::Rect result_rect;
   //parameters of tracker
-  bool HOG = true;
-  bool FIXEDWINDOW = false;
-  bool MULTISCALE = true;
-  bool SILENT = true;
-  bool LAB = false;
+  bool HOG;
+  bool FIXEDWINDOW;
+  bool MULTISCALE;
+  bool SILENT;
+  bool LAB;
 };
 
 #endif

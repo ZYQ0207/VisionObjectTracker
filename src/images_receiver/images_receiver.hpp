@@ -1,5 +1,5 @@
-#ifndef _IMAGE_RECEIVER_HPP_
-#define _IMAGE_RECEIVER_HPP_
+#ifndef _IMAGES_RECEIVER_HPP_
+#define _IMAGES_RECEIVER_HPP_
 
 
 #include <ros/ros.h>
@@ -8,12 +8,14 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <sensor_msgs/image_encodings.h>
-#include <sstream>
+#include <iostream>
 #include <dirent.h>
 
 //Algorithm of trackers
 #include "../kcf/kcf_tracker/kcf_tracker.hpp"
 
+
+static const std::string OPENCV_WINDOW = "Image Window";
 
 class ImageReceiver
 {
@@ -29,9 +31,9 @@ private:
   int image_index;
 
   //reference of trackers can be added here
-  KCFFrameTracker &tracker;
+  KCFFrameTracker *tracker;
 
-}
+};
 
 
 #endif

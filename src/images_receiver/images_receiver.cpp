@@ -1,7 +1,10 @@
 #include "images_receiver.hpp"
 
 
-ImageReceiver::~ImageReceiver(){}
+ImageReceiver::~ImageReceiver()
+{
+  cv::destroyWindow(OPENCV_WINDOW);
+}
 
 
 ImageReceiver::ImageReceiver(ros::NodeHandle &n):
@@ -10,10 +13,10 @@ ImageReceiver::ImageReceiver(ros::NodeHandle &n):
   //basic configuration
   image_sub_ = it_.subscribe("/image_raw", 10, &ImageReceiver::image_callback, this);
   image_index = 1;
+  cv::namedWindow(OPENCV_WINDOW);
 
   //initiate KCF tracker
-  KCFFrameTracker tracker(cv::Rect(246, 226, 94, 114));
-  this->tracker = tracker;
+  this->tracker = new KCFFrameTracker(cv::Rect(246, 226, 94, 114));
 }
 
 
@@ -32,8 +35,11 @@ void ImageReceiver::image_callback(const sensor_msgs::ImageConstPtr& msg)
     return;
   }
   //use the image train the tracker and get the roi of target
-  result_rect = tracker.track(cv_ptr->image);
+  result_rect = tracker->track(cv_ptr->image);
   //draw the rect on the image
-
+  cv::rectangle(cv_ptr->image, result_rect, cv::Scalar(0, 255, 255), 1, 8);
+  //show the result on the picture
+  cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+  cv::waitKey(3);
 
 }

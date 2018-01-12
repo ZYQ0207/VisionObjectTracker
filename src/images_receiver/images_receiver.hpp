@@ -9,7 +9,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <sensor_msgs/image_encodings.h>
 #include <iostream>
-#include <dirent.h>
+
 
 //Algorithm of trackers
 #include "../kcf/kcf_tracker/kcf_tracker.hpp"

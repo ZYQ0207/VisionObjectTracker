@@ -37,7 +37,7 @@ void ImageReceiver::image_callback(const sensor_msgs::ImageConstPtr& msg)
   //use the image train the tracker and get the roi of target
   result_rect = tracker->track(cv_ptr->image);
   //draw the rect on the image
-  cv::rectangle(cv_ptr->image, result_rect, cv::Scalar(0, 255, 255), 1, 8);
+  cv::rectangle(cv_ptr->image, result_rect, cv::Scalar(0, 255, 255), 2, 8);
   //show the result on the picture
   cv::imshow(OPENCV_WINDOW, cv_ptr->image);
   cv::waitKey(3);

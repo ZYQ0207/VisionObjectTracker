@@ -18,7 +18,7 @@ void ImageSender::image_send(const ros::TimerEvent&)
   sensor_msgs::ImagePtr imgmsg;
 
   cv::Mat cv_img = cv::imread(get_image_path(), CV_LOAD_IMAGE_UNCHANGED);
-  imgmsg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", cv_img).toImageMsg();
+  imgmsg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", cv_img).toImageMsg();
   image_pub_.publish(imgmsg);
   //refresh the image index (from 0001.jpg to 0xxx.jpg)
   image_index ++;

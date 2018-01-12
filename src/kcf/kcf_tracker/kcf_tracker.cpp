@@ -6,7 +6,7 @@ KCFFrameTracker::KCFFrameTracker(cv::Rect init_rect)
   tracker_ptr = new KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
   result_rect = init_rect;
   frame_index = 1;
-
+  //parameters for KCF tracker
   HOG = true;
   FIXEDWINDOW = false;
   MULTISCALE = true;

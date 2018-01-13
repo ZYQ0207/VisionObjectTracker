@@ -4,6 +4,7 @@
 ImageReceiver::~ImageReceiver()
 {
   cv::destroyWindow(OPENCV_WINDOW);
+  delete[] tracker;
 }
 
 

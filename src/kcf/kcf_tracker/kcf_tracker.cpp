@@ -1,20 +1,23 @@
 #include "kcf_tracker.hpp"
 #include <iostream>
 
-KCFFrameTracker::KCFFrameTracker(cv::Rect init_rect)
+KCFFrameTracker::KCFFrameTracker(cv::Rect init_rect):
+  result_rect(init_rect),
+  frame_index(1),
+  //parameters for KCF tracker
+  HOG(true),
+  FIXEDWINDOW(false),
+  MULTISCALE(true),
+  LAB(false)
 {
   tracker_ptr = new KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
-  result_rect = init_rect;
-  frame_index = 1;
-  //parameters for KCF tracker
-  HOG = true;
-  FIXEDWINDOW = false;
-  MULTISCALE = true;
-  LAB = false;
 }
 
 
-KCFFrameTracker::~KCFFrameTracker(){}
+KCFFrameTracker::~KCFFrameTracker()
+{
+  delete[] tracker_ptr;
+}
 
 
 cv::Rect KCFFrameTracker::track(cv::Mat frame)

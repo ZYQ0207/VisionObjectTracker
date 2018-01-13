@@ -2,10 +2,10 @@
 
 
 ImageSender::ImageSender(std::string path, ros::NodeHandle &n):
-  it_(n)
+  it_(n),
+  image_index(1)
 {
   image_pub_ = it_.advertise("/image_raw", 1);
-  image_index = 1;
   image_path_ << path;
 }
 

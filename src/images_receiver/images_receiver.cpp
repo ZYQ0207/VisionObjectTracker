@@ -8,15 +8,14 @@ ImageReceiver::~ImageReceiver()
 
 
 ImageReceiver::ImageReceiver(ros::NodeHandle &n):
-  it_(n)
+  it_(n),
+  image_index(1),
+  //initiate KCF tracker
+  tracker(new KCFFrameTracker(cv::Rect(246, 226, 94, 114)))
 {
   //basic configuration
   image_sub_ = it_.subscribe("/image_raw", 25, &ImageReceiver::image_callback, this);
-  image_index = 1;
   cv::namedWindow(OPENCV_WINDOW);
-
-  //initiate KCF tracker
-  this->tracker = new KCFFrameTracker(cv::Rect(246, 226, 94, 114));
   //this->tracker = new KCFFrameTracker(cv::Rect(146, 54, 68, 101));
 }
 

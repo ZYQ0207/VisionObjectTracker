@@ -10,7 +10,6 @@ ImageReceiver::~ImageReceiver()
 
 ImageReceiver::ImageReceiver(ros::NodeHandle &n):
   it_(n),
-  image_index(1),
   //initiate KCF tracker
   tracker(new KCFFrameTracker(cv::Rect(246, 226, 94, 114)))
 {
